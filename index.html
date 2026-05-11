@@ -288,14 +288,9 @@ section{padding:100px 0;}
 }
 
 /* Scroll reveal */
-.reveal{
-  opacity:0;
-  transform:translateY(24px);
-  transition:opacity 0.6s var(--ease),transform 0.6s var(--ease);
-}
-.reveal.visible{opacity:1;transform:translateY(0);}
-/* Ensure active page elements are never permanently hidden */
-.page.active .reveal{opacity:0;}
+/* reveal — simplified, always visible */
+.reveal{ opacity:1; transform:none; }
+.reveal.visible{ opacity:1; transform:none; }
 
 /* Gold divider */
 .divider{
@@ -1229,7 +1224,7 @@ footer{
   gap:10px;
 }
 .social-card:hover{background:#1e1e1e;color:var(--white);}
-.social-icon{font-size:24px;}
+.social-icon{display:flex;align-items:center;justify-content:center;}
 
 
 /* Real images */
@@ -1241,6 +1236,7 @@ footer{
 ────────────────────────────────────── */
 @media(max-width:960px){
   .plans-grid{grid-template-columns:1fr 1fr !important;}
+  .venue-strip-inner{grid-template-columns:1fr 1fr !important;}
   .nav-links,.nav-cta{display:none;}
   .nav-hamburger{display:flex;}
 
@@ -1366,7 +1362,7 @@ footer{
 
   <!-- VENUE PHOTO STRIP -->
   <section style="padding:0;background:var(--bg)">
-    <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3px">
+    <div class="venue-strip-inner" style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3px">
       <div style="position:relative;overflow:hidden;height:320px">
         <img src="./6面球場.jpg" alt="匹克王 6面球場" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75) saturate(0.85);transition:filter 0.5s,transform 0.6s" onmouseover="this.style.filter='brightness(0.92) saturate(1)';this.style.transform='scale(1.03)'" onmouseout="this.style.filter='brightness(0.75) saturate(0.85)';this.style.transform='scale(1)'">
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 32px">
@@ -2115,7 +2111,7 @@ footer{
           </div>
           <div class="info-block reveal">
             <div class="info-label">Contact</div>
-            <div class="info-val">聯絡人：張容榕</div>
+            <div class="info-val">聯絡我們</div>
             <div class="info-sub">
               電話：0911-716-532<br>
               Email：ops.pickleking@gmail.com<br>
@@ -2153,31 +2149,60 @@ footer{
       <h3 class="section-title reveal" style="margin-top:72px;font-size:clamp(22px,3vw,32px)">營業時間 <em>Hours</em></h3>
       <div class="gold-bar reveal"></div>
       <div class="hours-grid">
-        <div class="hour-item reveal"><span class="hour-day">週一 — 週五</span><span class="hour-time">06:00 – 22:00</span></div>
-        <div class="hour-item reveal"><span class="hour-day">週六</span><span class="hour-time">06:00 – 23:00</span></div>
-        <div class="hour-item reveal"><span class="hour-day">週日</span><span class="hour-time">06:00 – 22:00</span></div>
-        <div class="hour-item reveal"><span class="hour-day">國定假日</span><span class="hour-time">依公告調整</span></div>
+        <div class="hour-item"><span class="hour-day">星期一</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期二</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期三</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期四</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期五</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期六</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期日</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">國定假日</span><span class="hour-time">依公告調整</span></div>
       </div>
 
       <!-- SOCIAL CARDS -->
       <div class="social-row" style="margin-top:48px">
-        <div class="social-card reveal">
-          <div class="social-icon">💬</div>
+        <div class="social-card">
+          <div class="social-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="36" height="36" rx="8" fill="#06C755"/>
+  <path d="M18 7C11.925 7 7 11.09 7 16.1c0 4.495 3.99 8.26 9.38 8.975.365.079.862.24.988.55.113.282.074.724.036 1.009l-.16 1.009c-.049.282-.225 1.104.968.602 1.193-.502 6.438-3.79 8.782-6.493C28.56 19.89 29 18.06 29 16.1 29 11.09 24.075 7 18 7z" fill="white"/>
+  <path d="M15.2 13.8h-.9a.25.25 0 00-.25.25v5.7c0 .138.112.25.25.25h.9a.25.25 0 00.25-.25v-5.7a.25.25 0 00-.25-.25zM21.45 13.8h-.9a.25.25 0 00-.25.25v3.388l-2.613-3.527A.251.251 0 0017.48 13.8h-.93a.25.25 0 00-.25.25v5.7c0 .138.112.25.25.25h.9a.25.25 0 00.25-.25v-3.387l2.617 3.53a.25.25 0 00.203.107h.93a.25.25 0 00.25-.25v-5.7a.25.25 0 00-.25-.25zM13.5 18.6H11.2v-4.55a.25.25 0 00-.25-.25h-.9a.25.25 0 00-.25.25v5.7c0 .066.027.127.07.172a.248.248 0 00.18.078H13.5a.25.25 0 00.25-.25v-.9a.25.25 0 00-.25-.25zM25.2 15.05a.25.25 0 00.25-.25v-.9a.25.25 0 00-.25-.25h-3.45a.248.248 0 00-.18.078.243.243 0 00-.07.172v5.7c0 .066.027.127.07.172a.248.248 0 00.18.078H25.2a.25.25 0 00.25-.25v-.9a.25.25 0 00-.25-.25H22.9v-.975H25.2a.25.25 0 00.25-.25v-.9a.25.25 0 00-.25-.25H22.9v-.975H25.2z" fill="#06C755"/>
+</svg></div>
           <div>LINE 官方帳號</div>
           <div style="font-size:11px;color:var(--dim2)">訂場 / 客服 / 活動通知</div>
         </div>
-        <div class="social-card reveal">
-          <div class="social-icon">📸</div>
+        <div class="social-card">
+          <div class="social-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="ig_g1" cx="30%" cy="107%" r="150%">
+      <stop offset="0%" stop-color="#fdf497"/>
+      <stop offset="5%" stop-color="#fdf497"/>
+      <stop offset="45%" stop-color="#fd5949"/>
+      <stop offset="60%" stop-color="#d6249f"/>
+      <stop offset="90%" stop-color="#285AEB"/>
+    </radialGradient>
+  </defs>
+  <rect width="36" height="36" rx="8" fill="url(#ig_g1)"/>
+  <circle cx="18" cy="18" r="5.5" stroke="white" stroke-width="2.2" fill="none"/>
+  <circle cx="24.5" cy="11.5" r="1.5" fill="white"/>
+  <rect x="6" y="6" width="24" height="24" rx="6" stroke="white" stroke-width="2.2" fill="none"/>
+</svg></div>
           <div>Instagram</div>
           <div style="font-size:11px;color:var(--dim2)">@picklekingtw</div>
         </div>
-        <div class="social-card reveal">
-          <div class="social-icon">👍</div>
+        <div class="social-card">
+          <div class="social-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="36" height="36" rx="8" fill="#1877F2"/>
+  <path d="M19.5 19.5h3l.5-3H19.5v-1.75c0-.87.42-1.75 1.75-1.75H23V10h-2.25C17.85 10 16 11.85 16 14.75V16.5h-2.5v3H16V27h3.5V19.5z" fill="white"/>
+</svg></div>
           <div>Facebook</div>
           <div style="font-size:11px;color:var(--dim2)">PICKLE KING 匹克王</div>
         </div>
-        <div class="social-card reveal">
-          <div class="social-icon">▶️</div>
+        <div class="social-card">
+          <div class="social-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="36" height="36" rx="8" fill="#FF0000"/>
+  <path d="M28.5 13.5a2.83 2.83 0 00-2-2C25 11 18 11 18 11s-7 0-8.5.5a2.83 2.83 0 00-2 2C7 15 7 18 7 18s0 3 .5 4.5a2.83 2.83 0 002 2C11 25 18 25 18 25s7 0 8.5-.5a2.83 2.83 0 002-2C29 21 29 18 29 18s0-3-.5-4.5z" fill="#FF0000"/>
+  <path d="M15.5 21.5l7-3.5-7-3.5v7z" fill="white"/>
+</svg></div>
           <div>YouTube</div>
           <div style="font-size:11px;color:var(--dim2)">賽事精華 / 教學影片</div>
         </div>
@@ -2257,14 +2282,13 @@ function navigate(page){
 }
 
 function showPageContent(pageEl){
+  // Content is visible by default; JS animation is enhancement only
   if(!pageEl) return;
-  const els = pageEl.querySelectorAll('.reveal');
-  els.forEach((el, i) => {
-    el.classList.remove('visible');
-    setTimeout(() => el.classList.add('visible'), 40 + Math.min(i, 12) * 50);
+  pageEl.style.opacity='0';
+  pageEl.style.transition='opacity 0.35s ease';
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{ pageEl.style.opacity='1'; });
   });
-  // Also watch for scroll-triggered elements
-  setTimeout(revealOnScroll, 100);
 }
 
 window.addEventListener('popstate',()=>{
@@ -2278,11 +2302,7 @@ window.addEventListener('popstate',()=>{
   navigate(page);
 })();
 
-// Fallback: ensure all reveals in active page show after 800ms max
-setTimeout(()=>{
-  document.querySelectorAll('.page.active .reveal:not(.visible)')
-    .forEach(el=>el.classList.add('visible'));
-},800);
+// Reveal fallback removed — content visible by default
 
 // ── Nav scroll ──
 window.addEventListener('scroll',()=>{
@@ -2301,21 +2321,8 @@ function closeDrawer(){
   document.getElementById('hamburger').classList.remove('open');
 }
 
-// ── Scroll Reveal (for below-fold content) ──
-function revealOnScroll(){
-  const els=document.querySelectorAll('.page.active .reveal:not(.visible)');
-  if(!els.length) return;
-  const obs=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('visible');
-        obs.unobserve(e.target);
-      }
-    });
-  },{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
-  els.forEach(el=>obs.observe(el));
-}
-window.addEventListener('scroll',revealOnScroll,{passive:true});
+// Scroll reveal — simplified no-op (content visible by default)
+function revealOnScroll(){}
 
 // ── Price tabs ──
 function switchPriceTab(el,id){
