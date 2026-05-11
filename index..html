@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PICKLE KING 匹克王｜台中中台灣第一座匹克球複合式俱樂部。6 面室內球場 × 精緻運動餐廳，打球、用餐、社交，三位一體。">
+<title>PICKLE KING｜匹克王運動餐廳 — 台中南屯</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+TC:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ──────────────────────────────────────
+   DESIGN TOKENS
+────────────────────────────────────── */
+:root {
+  --gold:       #C9A84C;
+  --gold-lt:    #E8C97A;
+  --gold-dk:    #8B6914;
+  --bg:         #0A0A0A;
+  --bg2:        #111111;
+  --card:       #1A1A1A;
+  --white:      #F5F0E8;
+  --dim:        rgba(245,240,232,0.55);
+  --dim2:       rgba(245,240,232,0.25);
+  --nav-h:      72px;
+  --ease:       cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ──────────────────────────────────────
+   RESET + BASE
+────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Noto Serif TC',serif;
+  font-weight:300;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+ul{list-style:none;}
+
+/* ──────────────────────────────────────
+   NAVIGATION
+────────────────────────────────────── */
+#nav{
+  position:fixed;top:0;left:0;right:0;
+  height:var(--nav-h);
+  z-index:1000;
+  transition:background 0.4s var(--ease),box-shadow 0.4s var(--ease);
+}
+#nav.scrolled{
+  background:rgba(10,10,10,0.95);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 1px 0 rgba(201,168,76,0.12);
+}
+.nav-inner{
+  max-width:1280px;
+  margin:0 auto;
+  padding:0 32px;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.nav-logo{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+}
+.nav-logo-en{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;
+  font-weight:400;
+  letter-spacing:0.2em;
+  color:var(--gold);
+  line-height:1;
+}
+.nav-logo-zh{
+  font-size:11px;
+  letter-spacing:0.35em;
+  color:var(--dim);
+  line-height:1;
+}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.nav-link{
+  font-size:13px;
+  letter-spacing:0.1em;
+  color:var(--dim);
+  padding:8px 14px;
+  position:relative;
+  transition:color 0.3s;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.nav-link::after{
+  content:'';
+  position:absolute;
+  bottom:4px;left:14px;right:14px;
+  height:1px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.3s var(--ease);
+}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link:hover::after,.nav-link.active::after{transform:scaleX(1);}
+.nav-cta{
+  background:var(--gold);
+  color:var(--bg);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:0.15em;
+  padding:10px 22px;
+  margin-left:8px;
+  transition:background 0.3s,transform 0.2s;
+}
+.nav-cta:hover{background:var(--gold-lt);transform:translateY(-1px);}
+
+/* Hamburger */
+.nav-hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  padding:8px;
+  cursor:pointer;
+}
+.nav-hamburger span{
+  width:24px;height:1px;
+  background:var(--white);
+  transition:transform 0.3s,opacity 0.3s;
+  display:block;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+/* Mobile nav drawer */
+.nav-drawer{
+  display:none;
+  position:fixed;top:var(--nav-h);left:0;right:0;
+  background:rgba(10,10,10,0.97);
+  backdrop-filter:blur(20px);
+  padding:24px 32px 32px;
+  border-top:1px solid rgba(201,168,76,0.12);
+  z-index:999;
+  flex-direction:column;
+  gap:4px;
+  transform:translateY(-20px);
+  opacity:0;
+  transition:transform 0.3s var(--ease),opacity 0.3s;
+}
+.nav-drawer.open{
+  display:flex;
+  transform:translateY(0);
+  opacity:1;
+}
+.nav-drawer .nav-link{padding:14px 0;font-size:15px;border-bottom:1px solid rgba(201,168,76,0.08);}
+.nav-drawer .nav-cta{margin:16px 0 0;text-align:center;display:block;padding:14px;}
+
+/* ──────────────────────────────────────
+   PAGE SYSTEM
+────────────────────────────────────── */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* ──────────────────────────────────────
+   SHARED COMPONENTS
+────────────────────────────────────── */
+.section-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;
+  letter-spacing:0.55em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:14px;
+  display:block;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(30px,4.5vw,52px);
+  font-weight:300;
+  line-height:1.15;
+  margin-bottom:20px;
+}
+.section-title em{
+  font-style:italic;
+  color:var(--gold);
+}
+.gold-bar{
+  width:48px;height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  margin-bottom:36px;
+}
+.gold-bar.center{margin-left:auto;margin-right:auto;}
+
+/* Page hero (sub pages) */
+.page-hero{
+  padding:calc(var(--nav-h) + 80px) 32px 80px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  background:var(--bg2);
+}
+.page-hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 80% at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 70%);
+  pointer-events:none;
+}
+.page-hero .section-label{text-align:center;}
+.page-hero .section-title{max-width:700px;margin:0 auto 20px;}
+.page-hero .gold-bar{margin:0 auto 0;}
+.page-hero-sub{
+  font-size:clamp(14px,2vw,16px);
+  color:var(--dim);
+  max-width:560px;
+  margin:24px auto 0;
+  line-height:2;
+}
+
+/* Containers */
+.container{max-width:1200px;margin:0 auto;padding:0 32px;}
+section{padding:100px 0;}
+
+/* Buttons */
+.btn-gold{
+  display:inline-block;
+  background:var(--gold);
+  color:var(--bg);
+  font-family:'Noto Serif TC',serif;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:0.15em;
+  padding:14px 36px;
+  transition:background 0.3s,transform 0.2s,box-shadow 0.3s;
+  cursor:pointer;
+}
+.btn-gold:hover{
+  background:var(--gold-lt);
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(201,168,76,0.25);
+}
+.btn-outline{
+  display:inline-block;
+  border:1px solid rgba(201,168,76,0.5);
+  color:var(--gold);
+  font-size:13px;
+  letter-spacing:0.2em;
+  padding:13px 34px;
+  transition:border-color 0.3s,color 0.3s,background 0.3s;
+  cursor:pointer;
+}
+.btn-outline:hover{
+  border-color:var(--gold);
+  background:rgba(201,168,76,0.08);
+}
+
+/* Placeholder image */
+.img-ph{
+  background:linear-gradient(135deg,#181818 0%,#242424 50%,#181818 100%);
+  position:relative;
+  overflow:hidden;
+}
+.img-ph::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(201,168,76,0.04) 50%,transparent 70%);
+}
+.img-ph::after{
+  content:'PICKLE KING';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(12px,2vw,18px);
+  letter-spacing:0.4em;
+  color:rgba(201,168,76,0.12);
+  white-space:nowrap;
+}
+
+/* Scroll reveal */
+/* reveal — simplified, always visible */
+.reveal{ opacity:1; transform:none; }
+.reveal.visible{ opacity:1; transform:none; }
+
+/* Gold divider */
+.divider{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,0.15),transparent);
+  margin:0;
+}
+
+/* Footer */
+footer{
+  background:var(--bg2);
+  padding:60px 0 32px;
+  border-top:1px solid rgba(201,168,76,0.1);
+}
+.footer-inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 32px;
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:48px;
+  margin-bottom:48px;
+}
+.footer-brand-en{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+  letter-spacing:0.2em;
+  color:var(--gold);
+  margin-bottom:6px;
+}
+.footer-brand-zh{
+  font-size:12px;
+  letter-spacing:0.3em;
+  color:var(--dim2);
+  margin-bottom:20px;
+}
+.footer-tagline{
+  font-size:13px;
+  color:var(--dim);
+  line-height:2;
+  max-width:240px;
+}
+.footer-col h4{
+  font-size:11px;
+  letter-spacing:0.4em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+.footer-col li{
+  font-size:13px;
+  color:var(--dim);
+  margin-bottom:10px;
+  cursor:pointer;
+  transition:color 0.3s;
+}
+.footer-col li:hover{color:var(--white);}
+.footer-col li a{color:inherit;}
+.footer-bottom{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 32px 0;
+  border-top:1px solid rgba(201,168,76,0.06);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.footer-copy{font-size:12px;color:var(--dim2);letter-spacing:0.05em;}
+.footer-trademark{font-size:12px;color:var(--dim2);}
+
+/* ──────────────────────────────────────
+   PAGE 1 — HOME
+────────────────────────────────────── */
+
+/* Hero */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  padding:120px 32px 80px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 90% 70% at 50% 50%,rgba(201,168,76,0.07) 0%,transparent 65%);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.035) 1px,transparent 1px);
+  background-size:72px 72px;
+  animation:gridPan 25s linear infinite;
+}
+@keyframes gridPan{
+  0%{transform:translate(0,0);}
+  100%{transform:translate(72px,72px);}
+}
+.hero-content{
+  position:relative;z-index:2;
+  text-align:center;
+  max-width:820px;
+}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:11px;
+  letter-spacing:0.5em;
+  color:var(--gold);
+  border:1px solid rgba(201,168,76,0.25);
+  padding:8px 20px;
+  margin-bottom:40px;
+  animation:fadeUp 1s 0.2s ease both;
+}
+.hero-badge::before,.hero-badge::after{
+  content:'';
+  width:24px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold));
+}
+.hero-badge::after{background:linear-gradient(90deg,var(--gold),transparent);}
+.hero-en{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(48px,9vw,108px);
+  font-weight:300;
+  letter-spacing:0.08em;
+  line-height:0.95;
+  color:var(--white);
+  animation:fadeUp 1.1s 0.4s ease both;
+}
+.hero-en span{color:var(--gold);}
+.hero-zh{
+  font-size:clamp(14px,2vw,18px);
+  letter-spacing:0.5em;
+  color:var(--dim);
+  margin-top:16px;
+  animation:fadeUp 1.1s 0.55s ease both;
+}
+.hero-tagline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(16px,2.5vw,24px);
+  font-style:italic;
+  color:var(--dim);
+  margin-top:24px;
+  line-height:1.6;
+  animation:fadeUp 1.1s 0.7s ease both;
+}
+.hero-tagline em{color:var(--gold-lt);font-style:normal;}
+.hero-divider{
+  width:100px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:40px auto;
+  animation:fadeUp 1.1s 0.85s ease both;
+}
+.hero-actions{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+  animation:fadeUp 1.1s 1s ease both;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(28px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.hero-scroll{
+  position:absolute;
+  bottom:40px;left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  font-size:10px;
+  letter-spacing:0.4em;
+  color:var(--dim2);
+  z-index:2;
+  animation:bounce 2.5s 2s ease infinite;
+}
+.hero-scroll::after{
+  content:'';
+  width:1px;height:44px;
+  background:linear-gradient(to bottom,rgba(201,168,76,0.4),transparent);
+}
+@keyframes bounce{
+  0%,100%{transform:translateX(-50%) translateY(0);}
+  50%{transform:translateX(-50%) translateY(10px);}
+}
+
+/* Stats bar */
+.stats-bar{
+  background:var(--bg2);
+  border-top:1px solid rgba(201,168,76,0.1);
+  border-bottom:1px solid rgba(201,168,76,0.1);
+  padding:0;
+}
+.stats-inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 32px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+.stat-item{
+  padding:40px 24px;
+  text-align:center;
+  border-right:1px solid rgba(201,168,76,0.08);
+  position:relative;
+}
+.stat-item:last-child{border-right:none;}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(38px,5vw,56px);
+  font-weight:300;
+  color:var(--gold);
+  line-height:1;
+  margin-bottom:8px;
+}
+.stat-unit{font-size:14px;color:var(--dim2);}
+.stat-label{
+  font-size:12px;
+  letter-spacing:0.2em;
+  color:var(--dim);
+  margin-top:4px;
+}
+
+/* Positioning */
+.positioning{
+  background:var(--bg);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.positioning::before{
+  content:'PICKLE KING';
+  position:absolute;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(70px,16vw,180px);
+  color:rgba(201,168,76,0.025);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  white-space:nowrap;
+  pointer-events:none;
+  letter-spacing:0.05em;
+  user-select:none;
+}
+.positioning .container{position:relative;z-index:1;}
+.positioning .section-title{max-width:680px;margin:0 auto 20px;}
+.positioning .gold-bar{margin:0 auto 36px;}
+.pos-body{
+  font-size:clamp(15px,2vw,17px);
+  color:var(--dim);
+  max-width:600px;
+  margin:0 auto;
+  line-height:2.3;
+}
+.pos-body strong{color:var(--white);font-weight:400;}
+
+/* Dual axis */
+.dual-axis{background:var(--bg2);}
+.dual-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3px;
+}
+.axis-card{
+  position:relative;
+  overflow:hidden;
+  min-height:420px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:48px 44px;
+}
+.axis-bg{
+  position:absolute;inset:0;
+}
+.axis-bg.sport{
+  background:linear-gradient(160deg,#0f1a0f 0%,#0a1208 40%,#0A0A0A 100%);
+}
+.axis-bg.dining{
+  background:linear-gradient(160deg,#1a140a 0%,#120e07 40%,#0A0A0A 100%);
+}
+.axis-bg::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(201,168,76,0.05) 0%,transparent 60%);
+}
+.axis-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:80px;
+  font-weight:300;
+  color:rgba(201,168,76,0.07);
+  position:absolute;
+  top:24px;right:32px;
+  line-height:1;
+  pointer-events:none;
+}
+.axis-content{position:relative;z-index:2;}
+.axis-icon{font-size:32px;margin-bottom:16px;}
+.axis-badge{
+  display:inline-block;
+  font-size:10px;
+  letter-spacing:0.4em;
+  color:var(--gold);
+  border:1px solid rgba(201,168,76,0.3);
+  padding:4px 12px;
+  margin-bottom:16px;
+}
+.axis-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,3.5vw,40px);
+  font-weight:300;
+  line-height:1.2;
+  margin-bottom:16px;
+}
+.axis-title em{font-style:italic;color:var(--gold);}
+.axis-text{
+  font-size:14px;
+  color:var(--dim);
+  line-height:2;
+  max-width:420px;
+}
+
+/* Features grid */
+.features{background:var(--bg);}
+.features-intro{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+  margin-bottom:64px;
+}
+.features-intro-right{
+  font-size:15px;
+  color:var(--dim);
+  line-height:2.3;
+  padding-top:12px;
+}
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.feat-card{
+  background:var(--card);
+  padding:40px 32px;
+  position:relative;
+  overflow:hidden;
+  transition:background 0.3s;
+}
+.feat-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.4s var(--ease);
+}
+.feat-card:hover{background:#1e1e1e;}
+.feat-card:hover::before{transform:scaleX(1);}
+.feat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;
+  font-weight:300;
+  color:rgba(201,168,76,0.1);
+  line-height:1;
+  margin-bottom:16px;
+}
+.feat-title{
+  font-size:15px;
+  font-weight:600;
+  color:var(--gold-lt);
+  margin-bottom:12px;
+  letter-spacing:0.05em;
+}
+.feat-text{
+  font-size:13px;
+  color:var(--dim);
+  line-height:2;
+}
+.feat-text strong{color:var(--white);font-weight:400;}
+
+/* CTA band */
+.cta-band{
+  background:var(--bg2);
+  border-top:1px solid rgba(201,168,76,0.08);
+  border-bottom:1px solid rgba(201,168,76,0.08);
+  text-align:center;
+  padding:80px 32px;
+  position:relative;
+  overflow:hidden;
+}
+.cta-band::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 100% at 50% 50%,rgba(201,168,76,0.05) 0%,transparent 70%);
+}
+.cta-band .section-title{max-width:640px;margin:0 auto 20px;position:relative;z-index:1;}
+.cta-band .gold-bar{margin:0 auto 32px;position:relative;z-index:1;}
+.cta-band p{
+  font-size:15px;color:var(--dim);
+  max-width:480px;margin:0 auto 36px;
+  line-height:2;position:relative;z-index:1;
+}
+.cta-band-actions{
+  display:flex;gap:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+  position:relative;z-index:1;
+}
+
+/* ──────────────────────────────────────
+   PAGE 2 — COURTS
+────────────────────────────────────── */
+.courts-overview{background:var(--bg);}
+.courts-specs{
+  background:var(--bg2);
+}
+.spec-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.spec-card{
+  background:var(--card);
+  padding:36px 32px;
+  border-bottom:2px solid var(--card);
+  transition:border-color 0.3s;
+}
+.spec-card:hover{border-bottom-color:var(--gold);}
+.spec-icon{font-size:28px;margin-bottom:16px;}
+.spec-title{
+  font-size:13px;
+  letter-spacing:0.2em;
+  color:var(--gold);
+  margin-bottom:8px;
+}
+.spec-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(22px,3vw,30px);
+  font-weight:300;
+  color:var(--white);
+  line-height:1.1;
+  margin-bottom:6px;
+}
+.spec-note{font-size:12px;color:var(--dim);}
+
+.courts-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3px;
+  margin-top:60px;
+}
+.court-card{
+  position:relative;
+  overflow:hidden;
+}
+.court-img{
+  height:300px;
+}
+.court-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 55%);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:32px;
+}
+.court-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;
+  letter-spacing:0.4em;
+  color:var(--gold);
+  margin-bottom:6px;
+}
+.court-name{
+  font-size:18px;
+  font-weight:400;
+  letter-spacing:0.1em;
+}
+
+.pricing-table{background:var(--bg);}
+.price-tabs{
+  display:flex;
+  gap:2px;
+  margin-bottom:48px;
+}
+.price-tab{
+  flex:1;
+  padding:18px;
+  text-align:center;
+  background:var(--card);
+  font-size:13px;
+  letter-spacing:0.15em;
+  color:var(--dim);
+  cursor:pointer;
+  transition:background 0.3s,color 0.3s;
+  border-bottom:2px solid transparent;
+}
+.price-tab.active,.price-tab:hover{
+  background:#1e1e1e;
+  color:var(--white);
+  border-bottom-color:var(--gold);
+}
+.price-rows{display:none;}
+.price-rows.active{display:block;}
+.price-row{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  align-items:center;
+  gap:24px;
+  padding:20px 0;
+  border-bottom:1px solid rgba(201,168,76,0.08);
+}
+.price-row:last-child{border-bottom:none;}
+.price-slot{font-size:14px;color:var(--dim);letter-spacing:0.05em;}
+.price-type{font-size:13px;color:var(--dim2);}
+.price-amount{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;
+  font-weight:300;
+  color:var(--gold);
+  white-space:nowrap;
+}
+.price-unit{font-size:11px;color:var(--dim2);margin-top:2px;text-align:right;}
+.price-note{
+  font-size:12px;
+  color:var(--dim2);
+  margin-top:24px;
+  padding:16px;
+  border:1px solid rgba(201,168,76,0.08);
+  line-height:1.8;
+}
+
+/* ──────────────────────────────────────
+   PAGE 3 — MEMBERSHIP
+────────────────────────────────────── */
+.membership-plans{background:var(--bg);}
+.plans-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3px;
+}
+.plan-card{
+  background:var(--card);
+  padding:48px 36px;
+  position:relative;
+  overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.plan-card.featured{
+  background:#1e1a12;
+  outline:1px solid rgba(201,168,76,0.3);
+}
+.plan-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 24px 64px rgba(0,0,0,0.4);
+}
+.plan-badge{
+  display:inline-block;
+  font-size:10px;
+  letter-spacing:0.4em;
+  padding:4px 12px;
+  margin-bottom:24px;
+}
+.plan-badge.regular{
+  border:1px solid rgba(201,168,76,0.2);
+  color:var(--dim);
+}
+.plan-badge.popular{
+  background:var(--gold);
+  color:var(--bg);
+  font-weight:600;
+}
+.plan-badge.premium{
+  border:1px solid rgba(201,168,76,0.4);
+  color:var(--gold);
+}
+.plan-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;
+  font-weight:300;
+  margin-bottom:4px;
+}
+.plan-zh{
+  font-size:12px;
+  letter-spacing:0.2em;
+  color:var(--dim);
+  margin-bottom:28px;
+}
+.plan-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(44px,5vw,58px);
+  font-weight:300;
+  color:var(--gold);
+  line-height:1;
+  margin-bottom:4px;
+}
+.plan-price sup{font-size:20px;vertical-align:super;}
+.plan-price sub{font-size:16px;color:var(--dim);}
+.plan-period{
+  font-size:12px;
+  color:var(--dim2);
+  margin-bottom:32px;
+  letter-spacing:0.1em;
+}
+.plan-divider{
+  width:40px;height:1px;
+  background:rgba(201,168,76,0.2);
+  margin-bottom:28px;
+}
+.plan-features{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-bottom:36px;
+}
+.plan-feat{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:13px;
+  color:var(--dim);
+  line-height:1.6;
+}
+.plan-feat::before{
+  content:'—';
+  color:var(--gold);
+  flex-shrink:0;
+  font-family:'Cormorant Garamond',serif;
+}
+.plan-feat.highlight{color:var(--white);}
+.plan-cta{width:100%;padding:14px;text-align:center;}
+
+.membership-faq{background:var(--bg2);}
+.faq-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+}
+.faq-item{
+  background:var(--card);
+  padding:32px 36px;
+  cursor:pointer;
+  transition:background 0.3s;
+}
+.faq-item:hover{background:#1e1e1e;}
+.faq-q{
+  font-size:15px;
+  font-weight:400;
+  letter-spacing:0.05em;
+  margin-bottom:12px;
+  color:var(--white);
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+.faq-q::before{
+  content:'Q';
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;
+  color:var(--gold);
+  flex-shrink:0;
+  line-height:1.2;
+}
+.faq-a{
+  font-size:13px;
+  color:var(--dim);
+  line-height:2;
+  padding-left:26px;
+}
+
+/* ──────────────────────────────────────
+   PAGE 4 — MENU
+────────────────────────────────────── */
+.menu-section{background:var(--bg);}
+.menu-cats{
+  display:flex;
+  gap:2px;
+  margin-bottom:48px;
+}
+.menu-cat{
+  flex:1;
+  padding:16px;
+  text-align:center;
+  background:var(--card);
+  font-size:13px;
+  letter-spacing:0.1em;
+  color:var(--dim);
+  cursor:pointer;
+  transition:background 0.3s,color 0.3s;
+  border-bottom:2px solid transparent;
+}
+.menu-cat.active,.menu-cat:hover{
+  background:#1e1e1e;
+  color:var(--white);
+  border-bottom-color:var(--gold);
+}
+.menu-group{display:none;}
+.menu-group.active{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.menu-item{
+  background:var(--card);
+  padding:28px 32px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:16px;
+  align-items:start;
+  transition:background 0.3s;
+}
+.menu-item:hover{background:#1e1e1e;}
+.menu-item-name{
+  font-size:15px;
+  font-weight:400;
+  letter-spacing:0.05em;
+  margin-bottom:6px;
+}
+.menu-item-en{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;
+  font-style:italic;
+  color:var(--dim2);
+  margin-bottom:8px;
+}
+.menu-item-desc{font-size:12px;color:var(--dim);line-height:1.8;}
+.menu-item-tag{
+  display:inline-block;
+  font-size:10px;
+  letter-spacing:0.2em;
+  padding:3px 8px;
+  margin-top:10px;
+}
+.tag-new{background:rgba(201,168,76,0.15);color:var(--gold);}
+.tag-hot{background:rgba(180,60,60,0.15);color:#E87A7A;}
+.tag-veg{background:rgba(60,120,60,0.15);color:#7ABA7A;}
+.menu-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;
+  font-weight:300;
+  color:var(--gold);
+  white-space:nowrap;
+}
+.menu-price span{font-size:13px;color:var(--dim2);}
+
+.menu-notice{
+  margin-top:36px;
+  padding:20px 28px;
+  border:1px solid rgba(201,168,76,0.1);
+  font-size:13px;
+  color:var(--dim2);
+  line-height:1.9;
+}
+
+/* ──────────────────────────────────────
+   PAGE 5 — EVENTS
+────────────────────────────────────── */
+.events-upcoming{background:var(--bg);}
+.event-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:3px;
+  margin-bottom:3px;
+}
+.event-card{
+  background:var(--card);
+  position:relative;
+  overflow:hidden;
+}
+.event-card.featured{
+  grid-column:span 1;
+}
+.event-img{height:300px;}
+.event-img.tall{height:400px;}
+.event-body{
+  padding:32px 36px;
+}
+.event-date{
+  font-family:'Cormorant Garamond',serif;
+  font-size:12px;
+  letter-spacing:0.35em;
+  color:var(--gold);
+  margin-bottom:10px;
+}
+.event-title{
+  font-size:18px;
+  font-weight:400;
+  letter-spacing:0.05em;
+  margin-bottom:10px;
+  line-height:1.4;
+}
+.event-sub{font-size:13px;color:var(--dim);line-height:1.8;margin-bottom:16px;}
+.event-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.event-tag{
+  font-size:10px;
+  letter-spacing:0.2em;
+  padding:4px 10px;
+  border:1px solid rgba(201,168,76,0.2);
+  color:var(--dim);
+}
+.event-status{
+  display:inline-block;
+  font-size:10px;
+  letter-spacing:0.3em;
+  padding:4px 12px;
+  font-weight:600;
+}
+.status-open{background:rgba(60,180,100,0.15);color:#7AE07A;}
+.status-soon{background:rgba(201,168,76,0.15);color:var(--gold);}
+.status-full{background:rgba(180,60,60,0.1);color:#E87A7A;}
+
+.events-corporate{background:var(--bg2);}
+.corp-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:2px;
+}
+.corp-card{
+  background:var(--card);
+  padding:40px 32px;
+}
+.corp-icon{font-size:32px;margin-bottom:20px;}
+.corp-title{
+  font-size:16px;
+  font-weight:400;
+  letter-spacing:0.05em;
+  margin-bottom:12px;
+  color:var(--gold-lt);
+}
+.corp-text{font-size:13px;color:var(--dim);line-height:2;}
+
+/* ──────────────────────────────────────
+   PAGE 6 — CONTACT
+────────────────────────────────────── */
+.contact-main{background:var(--bg);}
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;
+  align-items:start;
+}
+.contact-info{display:flex;flex-direction:column;gap:36px;}
+.info-block{}
+.info-label{
+  font-size:11px;
+  letter-spacing:0.4em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.info-val{
+  font-size:15px;
+  line-height:1.9;
+  color:var(--white);
+}
+.info-sub{font-size:13px;color:var(--dim);margin-top:4px;line-height:1.8;}
+.map-ph{
+  height:380px;
+  border:1px solid rgba(201,168,76,0.1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:16px;
+  font-size:13px;
+  color:var(--dim2);
+  letter-spacing:0.2em;
+  position:relative;
+  overflow:hidden;
+}
+.map-ph::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+.map-icon{font-size:36px;position:relative;}
+.map-addr{
+  font-size:14px;
+  color:var(--dim);
+  text-align:center;
+  line-height:2;
+  position:relative;
+}
+
+.hours-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+  margin-top:48px;
+}
+.hour-item{
+  background:var(--card);
+  padding:24px 28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.hour-day{font-size:13px;color:var(--dim);letter-spacing:0.1em;}
+.hour-time{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;
+  font-weight:300;
+  color:var(--white);
+}
+
+.social-row{
+  display:flex;
+  gap:2px;
+  margin-top:48px;
+}
+.social-card{
+  flex:1;
+  background:var(--card);
+  padding:24px;
+  text-align:center;
+  font-size:13px;
+  color:var(--dim);
+  letter-spacing:0.1em;
+  transition:background 0.3s,color 0.3s;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+.social-card:hover{background:#1e1e1e;color:var(--white);}
+.social-icon{display:flex;align-items:center;justify-content:center;}
+
+
+/* Real images */
+.real-img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.72) saturate(0.8);transition:filter 0.5s ease,transform 0.6s ease;}
+.court-card:hover .real-img,.event-card:hover .real-img{filter:brightness(0.88) saturate(1);transform:scale(1.04);}
+.page-hero-img{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;opacity:0.13;z-index:0;pointer-events:none;}
+/* ──────────────────────────────────────
+   RESPONSIVE
+────────────────────────────────────── */
+@media(max-width:960px){
+  .plans-grid{grid-template-columns:1fr 1fr !important;}
+  .venue-strip-inner{grid-template-columns:1fr 1fr !important;}
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .stat-item:nth-child(2){border-right:none;}
+  .stat-item:nth-child(3){border-top:1px solid rgba(201,168,76,0.08);}
+  .stat-item:nth-child(4){border-top:1px solid rgba(201,168,76,0.08);border-right:none;}
+
+  .dual-grid,.features-intro,.faq-grid,.event-grid,
+  .contact-grid,.courts-grid{grid-template-columns:1fr;}
+
+  .features-grid,.plans-grid,.spec-grid,.corp-grid{grid-template-columns:1fr 1fr;}
+
+  .footer-inner{grid-template-columns:1fr 1fr;gap:36px;}
+
+  .menu-cats{flex-wrap:wrap;}
+  .menu-cat{flex:1 0 calc(50% - 1px);}
+  .menu-group.active{grid-template-columns:1fr;}
+
+  .price-tabs{flex-wrap:wrap;}
+  .price-tab{flex:1 0 calc(50% - 1px);}
+
+  .hours-grid,.social-row{grid-template-columns:1fr;}
+}
+
+@media(max-width:640px){
+  .plans-grid{grid-template-columns:1fr !important;}
+  .venue-strip-grid{grid-template-columns:1fr !important;}
+  :root{--nav-h:64px;}
+  section{padding:72px 0;}
+  .container{padding:0 20px;}
+  .hero-actions{flex-direction:column;align-items:center;}
+  .features-grid,.plans-grid,.spec-grid,.corp-grid,
+  .hours-grid{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr;}
+  .page-hero{padding:calc(var(--nav-h)+60px) 20px 60px;}
+  .price-row{grid-template-columns:1fr auto;}
+  .price-type{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ──────────────────── NAVIGATION ──────────────────── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="navigate('home')" style="cursor:pointer">
+      <span class="nav-logo-en">PICKLE KING</span>
+      <span class="nav-logo-zh">匹克王運動餐廳</span>
+    </div>
+    <div class="nav-links">
+      <span class="nav-link" data-nav="home"    onclick="navigate('home')">首頁</span>
+      <span class="nav-link" data-nav="courts"  onclick="navigate('courts')">場地訂場</span>
+      <span class="nav-link" data-nav="membership" onclick="navigate('membership')">會員方案</span>
+      <span class="nav-link" data-nav="menu"    onclick="navigate('menu')">餐飲菜單</span>
+      <span class="nav-link" data-nav="events"  onclick="navigate('events')">賽事活動</span>
+      <span class="nav-link" data-nav="contact" onclick="navigate('contact')">聯絡我們</span>
+      <span class="nav-cta" onclick="navigate('courts')">立即訂場</span>
+    </div>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleDrawer()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="nav-drawer" id="drawer">
+  <span class="nav-link" onclick="navigate('home');closeDrawer()">首頁</span>
+  <span class="nav-link" onclick="navigate('courts');closeDrawer()">場地訂場</span>
+  <span class="nav-link" onclick="navigate('membership');closeDrawer()">會員方案</span>
+  <span class="nav-link" onclick="navigate('menu');closeDrawer()">餐飲菜單</span>
+  <span class="nav-link" onclick="navigate('events');closeDrawer()">賽事活動</span>
+  <span class="nav-link" onclick="navigate('contact');closeDrawer()">聯絡我們</span>
+  <span class="nav-cta btn-gold" onclick="navigate('courts');closeDrawer()">立即訂場</span>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════════════ -->
+<div class="page active" data-page="home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <img src="./球場入口.jpg" alt="PICKLE KING 球場入口" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:brightness(0.32) saturate(0.7);z-index:0;">
+    <div class="hero-bg" style="z-index:1"></div>
+    <div class="hero-grid" style="z-index:1;opacity:0.5"></div>
+    <div class="hero-content" style="position:relative;z-index:2">
+      <div class="hero-badge">TAICHUNG · NANTUN · SINCE 2026</div>
+      <h1 class="hero-en">PICKLE<br><span>KING</span></h1>
+      <p class="hero-zh">匹克王運動餐廳</p>
+      <p class="hero-tagline">中台灣第一座<em>匹克球複合式俱樂部</em><br>球場 × 餐廳 × 社群，三軸並行</p>
+      <div class="hero-divider"></div>
+      <div class="hero-actions">
+        <span class="btn-gold" onclick="navigate('courts')">立即訂場 BOOK A COURT</span>
+        <span class="btn-outline" onclick="navigate('membership')">查看會員方案</span>
+      </div>
+    </div>
+    <div class="hero-scroll" style="z-index:2">SCROLL</div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-num">6</div>
+        <div class="stat-label">室內匹克球場 <span class="stat-unit">Courts</span></div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">2,500</div>
+        <div class="stat-label">免費停車格 <span class="stat-unit">Parking</span></div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">IFP</div>
+        <div class="stat-label">國際標準賽制 <span class="stat-unit">Official Rules</span></div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">®</div>
+        <div class="stat-label">商標已完成申請 <span class="stat-unit">Registered</span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- VENUE PHOTO STRIP -->
+  <section style="padding:0;background:var(--bg)">
+    <div class="venue-strip-inner" style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3px">
+      <div style="position:relative;overflow:hidden;height:320px">
+        <img src="./6面球場.jpg" alt="匹克王 6面球場" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75) saturate(0.85);transition:filter 0.5s,transform 0.6s" onmouseover="this.style.filter='brightness(0.92) saturate(1)';this.style.transform='scale(1.03)'" onmouseout="this.style.filter='brightness(0.75) saturate(0.85)';this.style.transform='scale(1)'">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 32px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.4em;color:var(--gold);margin-bottom:6px">COURTS</div>
+          <div style="font-size:17px;font-weight:400;letter-spacing:0.08em">6 面室內球場 IFP 標準</div>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;height:320px">
+        <img src="./球拍品牌.jpg" alt="NAPA 球拍展示" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75) saturate(0.85);transition:filter 0.5s,transform 0.6s" onmouseover="this.style.filter='brightness(0.92) saturate(1)';this.style.transform='scale(1.03)'" onmouseout="this.style.filter='brightness(0.75) saturate(0.85)';this.style.transform='scale(1)'">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 32px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.4em;color:var(--gold);margin-bottom:6px">EQUIPMENT</div>
+          <div style="font-size:17px;font-weight:400;letter-spacing:0.08em">NAPA 官方合作品牌</div>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;height:320px">
+        <img src="./教室空間.jpg" alt="匹克王 多功能空間" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75) saturate(0.85);transition:filter 0.5s,transform 0.6s" onmouseover="this.style.filter='brightness(0.92) saturate(1)';this.style.transform='scale(1.03)'" onmouseout="this.style.filter='brightness(0.75) saturate(0.85)';this.style.transform='scale(1)'">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 32px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.4em;color:var(--gold);margin-bottom:6px">LOUNGE</div>
+          <div style="font-size:17px;font-weight:400;letter-spacing:0.08em">多功能交流空間</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSITIONING -->
+  <section class="positioning">
+    <div class="container" style="text-align:center">
+      <span class="section-label reveal">Core Positioning</span>
+      <h2 class="section-title reveal">偉大的城市，<em>需要偉大的聚場</em></h2>
+      <div class="gold-bar center reveal"></div>
+      <p class="pos-body reveal">
+        匹克王打破了「運動場館」與「社交餐廳」之間的邊界。<br>
+        在這裡，比賽是開場，餐飲是延長賽，<strong>人與人的連結才是最終目的地</strong>。<br><br>
+        中台灣第一座真正意義上的<strong>匹克球複合式俱樂部</strong>，<br>
+        為個人、球隊、企業與節目製作，提供無可取代的全方位場域體驗。
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- DUAL AXIS -->
+  <section class="dual-axis" style="padding:0">
+    <div class="dual-grid">
+      <div class="axis-card">
+        <div class="axis-bg sport"></div>
+        <div class="axis-num">01</div>
+        <div class="axis-content">
+          <div class="axis-icon">🏓</div>
+          <div class="axis-badge">SPORT AXIS</div>
+          <h3 class="axis-title"><em>Pickleball</em><br>匹克球球場</h3>
+          <p class="axis-text">6 面 IFP 標準室內球場，採用專業彈性地板，溫控空調，LED 精準照明。<br>無論是入門課程、社群聯誼賽，或是正式競技賽事，匹克王都是您最理想的場域。</p>
+        </div>
+      </div>
+      <div class="axis-card">
+        <div class="axis-bg dining"></div>
+        <div class="axis-num">02</div>
+        <div class="axis-content">
+          <div class="axis-icon">🍷</div>
+          <div class="axis-badge">DINING AXIS</div>
+          <h3 class="axis-title"><em>Bistro</em><br>運動餐廳</h3>
+          <p class="axis-text">賽後不必另找去處。由主廚操刀的俱樂部餐廳，從輕食到主餐、特調飲品到甜點，<br>為每一場球局畫下完美的句號，讓社交在球拍放下後繼續延伸。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <div class="features-intro">
+        <div>
+          <span class="section-label reveal">Why PICKLE KING</span>
+          <h2 class="section-title reveal">一個場館，<em>六重體驗</em></h2>
+          <div class="gold-bar reveal"></div>
+        </div>
+        <p class="features-intro-right reveal">
+          匹克王不只是球場，也不只是餐廳。<br>
+          這是台中南屯全新的城市生活坐標，<br>
+          為運動愛好者、美食客與社交需求者，<br>
+          同時打造一個不必妥協的全方位場域。
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feat-card reveal">
+          <div class="feat-num">01</div>
+          <div class="feat-title">🏓 IFP 標準球場</div>
+          <p class="feat-text"><strong>6 面室內球場</strong>，符合國際匹克球聯合會官方規格，支援正式競技賽事及社區聯誼，全天候溫控，不受天氣影響。</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-num">02</div>
+          <div class="feat-title">🍽️ 俱樂部餐廳</div>
+          <p class="feat-text">緊鄰球場的<strong>精緻餐廳</strong>，從賽後輕食、主廚套餐到特調飲品，打球與用餐的距離只有幾步路。</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-num">03</div>
+          <div class="feat-title">👥 多元會員體制</div>
+          <p class="feat-text">彈性會籍設計涵蓋<strong>個人、家庭與企業</strong>三大族群。平日月票、全時月票、年度尊榮會員，讓每個人都能找到最合適的方案。</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-num">04</div>
+          <div class="feat-title">🏆 賽事主辦能量</div>
+          <p class="feat-text">與<strong>中華民國匹克球總會</strong>及台中市委員會深度合作，定期舉辦社區聯誼賽與進階賽事，為球員提供真實競技舞台。</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-num">05</div>
+          <div class="feat-title">🎬 節目媒體友善</div>
+          <p class="feat-text">高挑空間與<strong>充足自然採光區</strong>，適合節目拍攝、品牌活動與企業包場，提供完整的媒體接待流程。</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-num">06</div>
+          <div class="feat-title">🅿️ 超大免費停車</div>
+          <p class="feat-text">緊鄰<strong>2,500 格免費停車場</strong>，位於中台灣交通樞紐台中南屯，開車族零煩惱，是全中台灣可及性最高的運動目的地。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <div class="gold-bar center"></div>
+    <h2 class="section-title">準備好了嗎？<em>讓我們開始打球</em></h2>
+    <p>不論您是第一次接觸匹克球的新手，還是已在競技圈馳騁的老手，匹克王都有為您設計的方案與場地。</p>
+    <div class="cta-band-actions">
+      <span class="btn-gold" onclick="navigate('courts')">查看場地 & 訂場</span>
+      <span class="btn-outline" onclick="navigate('contact')">預約場館參觀</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: COURTS
+══════════════════════════════════════════════ -->
+<div class="page" data-page="courts">
+
+  <div class="page-hero">
+    <span class="section-label">Courts & Booking</span>
+    <h1 class="section-title">場地訂場<em> Courts</em></h1>
+    <p class="page-hero-sub">6 面 IFP 標準室內球場，全天候溫控空調，專業彈性地板。<br>從日間社群球局到夜間競技賽事，這裡是中台灣最頂尖的匹克球場域。</p>
+  </div>
+
+  <!-- SPECS -->
+  <section class="courts-specs">
+    <div class="container">
+      <span class="section-label reveal">Court Specifications</span>
+      <h2 class="section-title reveal">場地規格 <em>一覽</em></h2>
+      <div class="gold-bar reveal"></div>
+      <div class="spec-grid">
+        <div class="spec-card reveal">
+          <div class="spec-icon">🏟️</div>
+          <div class="spec-title">TOTAL COURTS</div>
+          <div class="spec-val">6 面</div>
+          <div class="spec-note">全室內空調場地，不受天氣影響</div>
+        </div>
+        <div class="spec-card reveal">
+          <div class="spec-icon">📏</div>
+          <div class="spec-title">COURT DIMENSIONS</div>
+          <div class="spec-val">6.1 × 13.4 m</div>
+          <div class="spec-note">符合 IFP 2026 國際官方標準</div>
+        </div>
+        <div class="spec-card reveal">
+          <div class="spec-icon">🎯</div>
+          <div class="spec-title">SURFACE TYPE</div>
+          <div class="spec-val">彈性運動地板</div>
+          <div class="spec-note">減震護膝，長時間打球不疲勞</div>
+        </div>
+        <div class="spec-card reveal">
+          <div class="spec-icon">💡</div>
+          <div class="spec-title">LIGHTING</div>
+          <div class="spec-val">LED 競技照明</div>
+          <div class="spec-note">2,000 lux 均勻照度，無眩光</div>
+        </div>
+        <div class="spec-card reveal">
+          <div class="spec-icon">❄️</div>
+          <div class="spec-title">ENVIRONMENT</div>
+          <div class="spec-val">全時溫控</div>
+          <div class="spec-note">夏季涼爽、冬季舒適，全年最佳打球環境</div>
+        </div>
+        <div class="spec-card reveal">
+          <div class="spec-icon">🅿️</div>
+          <div class="spec-title">PARKING</div>
+          <div class="spec-val">2,500 格</div>
+          <div class="spec-note">周邊免費停車場，開車族零煩惱</div>
+        </div>
+      </div>
+
+      <!-- Court cards -->
+      <div class="courts-grid" style="margin-top:48px">
+        <div class="court-card reveal">
+          <div class="court-img" style="overflow:hidden"><img class="real-img" src="./6面球場.jpg" alt="1 — 2 號場｜標準場" loading="lazy"></div>
+          <div class="court-overlay">
+            <div class="court-num">COURT NO.</div>
+            <div class="court-name">1 — 2 號場｜標準場</div>
+          </div>
+        </div>
+        <div class="court-card reveal">
+          <div class="court-img" style="overflow:hidden"><img class="real-img" src="./球場入口.jpg" alt="3 — 4 號場｜標準場" loading="lazy"></div>
+          <div class="court-overlay">
+            <div class="court-num">COURT NO.</div>
+            <div class="court-name">3 — 4 號場｜標準場</div>
+          </div>
+        </div>
+        <div class="court-card reveal">
+          <div class="court-img" style="overflow:hidden"><img class="real-img" src="./球拍品牌.jpg" alt="5 — 6 號場｜旗艦場" loading="lazy"></div>
+          <div class="court-overlay">
+            <div class="court-num">COURT NO.</div>
+            <div class="court-name">5 — 6 號場｜旗艦場</div>
+          </div>
+        </div>
+        <div class="court-card reveal" style="background:var(--bg2);display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:300px;gap:20px;padding:40px">
+          <div style="font-size:13px;letter-spacing:0.3em;color:var(--gold)">BOOK NOW</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;text-align:center;line-height:1.3">線上訂場<br><em style="font-style:italic;color:var(--gold)">隨時開始</em></div>
+          <span class="btn-gold" onclick="window.open('https://page.line.me/772wlyoq?oat_content=url&openQrModal=true','_blank')">前往訂場系統</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING TABLE -->
+  <section class="pricing-table">
+    <div class="container">
+      <span class="section-label reveal">Pricing</span>
+      <h2 class="section-title reveal">場地費率 <em>一覽</em></h2>
+      <div class="gold-bar reveal"></div>
+
+      <div class="price-tabs">
+        <div class="price-tab active" onclick="switchPriceTab(this,'std')">標準場（4 面）</div>
+        <div class="price-tab" onclick="switchPriceTab(this,'flagship')">旗艦場（2 面）</div>
+        <div class="price-tab" onclick="switchPriceTab(this,'vip')">VIP 方案</div>
+        <div class="price-tab" onclick="switchPriceTab(this,'corp')">包場方案</div>
+      </div>
+
+      <div class="price-rows active" id="pr-std">
+        <div class="price-row"><div><div class="price-slot">離峰　週一～週五　09:00 – 17:00</div><div class="price-type">一般會員原價</div></div><div style="text-align:right"><div class="price-amount" style="font-size:22px">NT$ 800<span style="font-size:12px"> /H</span></div><div class="price-unit">儲值會員 97折 ≒ <strong style="color:var(--gold-lt)">NT$ 776</strong></div></div></div>
+        <div class="price-row"><div><div class="price-slot">尖峰　週一～週五　17:00 – 22:00</div><div class="price-type">一般會員原價</div></div><div style="text-align:right"><div class="price-amount" style="font-size:22px">NT$ 1,000<span style="font-size:12px"> /H</span></div><div class="price-unit">儲值會員 97折 ≒ <strong style="color:var(--gold-lt)">NT$ 970</strong></div></div></div>
+        <div class="price-row"><div><div class="price-slot">週末全天尖峰　週六～週日</div><div class="price-type">一般會員原價</div></div><div style="text-align:right"><div class="price-amount" style="font-size:22px">NT$ 950<span style="font-size:12px"> /H</span></div><div class="price-unit">儲值會員 97折 ≒ <strong style="color:var(--gold-lt)">NT$ 922</strong></div></div></div>
+        <div class="price-note">※ 標準場共 4 面。儲值會員：線上儲值 NT$1,000 以上自動開通，全時段 97 折，小數點四捨五入。</div>
+      </div>
+      <div class="price-rows" id="pr-flagship">
+        <div class="price-row"><div><div class="price-slot">離峰　週一～週五　09:00 – 17:00</div><div class="price-type">一般會員原價</div></div><div style="text-align:right"><div class="price-amount" style="font-size:22px">NT$ 960<span style="font-size:12px"> /H</span></div><div class="price-unit">儲值會員 97折 ≒ <strong style="color:var(--gold-lt)">NT$ 931</strong></div></div></div>
+        <div class="price-row"><div><div class="price-slot">尖峰　週一～週五　17:00 – 22:00</div><div class="price-type">一般會員原價</div></div><div style="text-align:right"><div class="price-amount" style="font-size:22px">NT$ 1,200<span style="font-size:12px"> /H</span></div><div class="price-unit">儲值會員 97折 ≒ <strong style="color:var(--gold-lt)">NT$ 1,164</strong></div></div></div>
+        <div class="price-row"><div><div class="price-slot">週末全天尖峰　週六～週日</div><div class="price-type">一般會員原價</div></div><div style="text-align:right"><div class="price-amount" style="font-size:22px">NT$ 1,140<span style="font-size:12px"> /H</span></div><div class="price-unit">儲值會員 97折 ≒ <strong style="color:var(--gold-lt)">NT$ 1,106</strong></div></div></div>
+        <div class="price-note">※ 旗艦場共 2 面，規格更高階。儲值會員全時段 97 折，小數點四捨五入。</div>
+      </div>
+      <div class="price-rows" id="pr-vip">
+        <div class="price-row"><div><div class="price-slot">標準場　離峰　週一～週五 09:00–17:00</div><div class="price-type">VIP 5,000 元方案</div></div><div style="text-align:right"><div class="price-amount" style="font-size:20px;color:var(--gold-lt)">買一 送一</div><div class="price-unit">贈同場面離峰優惠券</div></div></div>
+        <div class="price-row"><div><div class="price-slot">標準場　尖峰 / 週末</div><div class="price-type">VIP 5,000 元方案</div></div><div style="text-align:right"><div class="price-amount" style="font-size:20px;color:var(--gold-lt)">買二 送一</div><div class="price-unit">贈同場面離峰優惠券</div></div></div>
+        <div class="price-row"><div><div class="price-slot">旗艦場　離峰　週一～週五 09:00–17:00</div><div class="price-type">VIP 5,000 元方案</div></div><div style="text-align:right"><div class="price-amount" style="font-size:20px;color:var(--gold-lt)">買一 送一</div><div class="price-unit">贈同場面離峰優惠券</div></div></div>
+        <div class="price-row"><div><div class="price-slot">旗艦場　尖峰 / 週末</div><div class="price-type">VIP 5,000 元方案</div></div><div style="text-align:right"><div class="price-amount" style="font-size:20px;color:var(--gold-lt)">買二 送一</div><div class="price-unit">贈同場面離峰優惠券</div></div></div>
+        <div class="price-note">※ VIP 方案：購買 NT$5,000 新手入門組合禮即享。「送一」為贈送同場面離峰優惠券；可疊加儲值 97 折。</div>
+      </div>
+      <div class="price-rows" id="pr-corp">
+        <div class="price-row"><div><div class="price-slot">半日包場（4 小時）</div><div class="price-type">含場地、基本服務</div></div><div style="text-align:right"><div class="price-amount" style="font-size:20px">洽詢報價</div><div class="price-unit">依場面 / 時段議定</div></div></div>
+        <div class="price-row"><div><div class="price-slot">全日包場（8 小時）</div><div class="price-type">含多面場、餐飲套餐</div></div><div style="text-align:right"><div class="price-amount" style="font-size:20px">洽詢報價</div><div class="price-unit">依場面 / 時段議定</div></div></div>
+        <div class="price-row"><div><div class="price-slot">全館包場（6 面 + 餐廳）</div><div class="price-type">含媒體接待、活動規劃</div></div><div style="text-align:right"><div class="price-amount" style="font-size:20px">洽詢報價</div><div class="price-unit">客製化方案</div></div></div>
+        <div class="price-note">※ 企業包場可加購餐飲、攝影等服務。請透過 LINE 官方帳號聯繫取得客製化報價。</div>
+      </div>
+            <div style="text-align:center;margin-top:48px">
+        <span class="btn-gold" onclick="window.open('https://page.line.me/772wlyoq?oat_content=url&openQrModal=true','_blank')">立即線上訂場</span>
+        &nbsp;&nbsp;
+        <span class="btn-outline" onclick="navigate('contact')">電話 / LINE 洽詢</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: MEMBERSHIP
+══════════════════════════════════════════════ -->
+<div class="page" data-page="membership">
+
+  <div class="page-hero" style="position:relative">
+    <img class="page-hero-img" src="./球場入口.jpg" alt="" loading="lazy">
+    <span class="section-label" style="position:relative;z-index:2">Membership</span>
+    <h1 class="section-title">會員方案 <em>Membership</em></h1>
+    <p class="page-hero-sub">選擇最適合您的會籍方案，享有專屬折扣、優先訂場、賽事報名等多項尊榮權益。<br>加入匹克王，成為中台灣最活躍的匹克球社群的一員。</p>
+  </div>
+
+  <section class="membership-plans">
+    <div class="container">
+      <span class="section-label reveal" style="text-align:center;display:block">Membership Plans</span>
+      <h2 class="section-title reveal" style="text-align:center">四種身分，<em>彈性選擇</em></h2>
+      <div class="gold-bar center reveal"></div>
+
+      <div class="plans-grid" style="grid-template-columns:repeat(4,1fr)">
+                <!-- PLAN A -->
+        <div class="plan-card reveal">
+          <span class="plan-badge regular">GENERAL</span>
+          <div class="plan-name">一般會員</div><div class="plan-zh">免費註冊</div>
+          <div class="plan-price"><sup style="font-size:14px">NT$</sup>0</div>
+          <div class="plan-period">到館 / 線上免費加入</div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li class="plan-feat">基本場地預約資格</li>
+            <li class="plan-feat">以原價計費（標準場 / 旗艦場）</li>
+            <li class="plan-feat">賽事報名資格</li>
+            <li class="plan-feat">活動資訊優先通知</li>
+          </ul>
+          <span class="btn-outline plan-cta" onclick="window.open('https://page.line.me/772wlyoq?oat_content=url&openQrModal=true','_blank')">免費加入</span>
+        </div>
+        <!-- PLAN B -->
+        <div class="plan-card reveal">
+          <span class="plan-badge regular">DEPOSIT</span>
+          <div class="plan-name">儲值會員</div><div class="plan-zh">儲值 NT$1,000 起即開通</div>
+          <div class="plan-price" style="font-size:32px"><sup style="font-size:12px">NT$</sup>1,000<sub style="font-size:12px">起</sub></div>
+          <div class="plan-period">1點 = 1元，場地 + 餐飲皆可抵</div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li class="plan-feat highlight">全時段 97 折優惠</li>
+            <li class="plan-feat highlight">點數無限期，場地 + 餐飲皆可抵</li>
+            <li class="plan-feat">7 日內可退款（扣 5% 手續費）</li>
+            <li class="plan-feat">點數歸零後身分保留</li>
+          </ul>
+          <div style="font-size:11px;color:var(--dim);line-height:2.2;border:1px solid rgba(201,168,76,0.1);padding:12px 14px;margin-bottom:20px">
+            NT$10,000 → 贈 500 點（共 10,500）<br>
+            NT$20,000 → 贈 1,800 點（共 21,800）<br>
+            NT$30,000 → 贈 4,500 點（共 34,500）<br>
+            NT$50,000 → 贈 10,000 點（共 60,000）
+          </div>
+          <span class="btn-outline plan-cta" onclick="window.open('https://page.line.me/772wlyoq?oat_content=url&openQrModal=true','_blank')">線上儲值</span>
+        </div>
+        <!-- PLAN C -->
+        <div class="plan-card featured reveal">
+          <span class="plan-badge popular">VIP</span>
+          <div class="plan-name">VIP 會員</div><div class="plan-zh">新手入門組合禮</div>
+          <div class="plan-price"><sup>NT$</sup>5,000</div>
+          <div class="plan-period">一次性購買，無月費</div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li class="plan-feat highlight">標準場 離峰：買一送一</li>
+            <li class="plan-feat highlight">標準場 尖峰 / 週末：買二送一</li>
+            <li class="plan-feat highlight">旗艦場 離峰：買一送一</li>
+            <li class="plan-feat highlight">旗艦場 尖峰 / 週末：買二送一</li>
+            <li class="plan-feat">含新手入門組合禮包</li>
+            <li class="plan-feat">可疊加儲值會員 97 折</li>
+          </ul>
+          <span class="btn-gold plan-cta" onclick="window.open('https://page.line.me/772wlyoq?oat_content=url&openQrModal=true','_blank')">立即購買</span>
+        </div>
+        <!-- PLAN D -->
+        <div class="plan-card reveal">
+          <span class="plan-badge premium">PACKAGE</span>
+          <div class="plan-name">專案會員</div><div class="plan-zh">月繳 / 季繳 / 年繳</div>
+          <div class="plan-price" style="font-size:26px">客製方案</div>
+          <div class="plan-period">固定時數，到場扣次計算</div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li class="plan-feat highlight">購買固定時數，到場扣次</li>
+            <li class="plan-feat">可選標準場 / 旗艦場 / 混合</li>
+            <li class="plan-feat">可選離峰 / 尖峰 / 週末</li>
+            <li class="plan-feat">月繳 / 季繳 / 年繳皆可</li>
+            <li class="plan-feat">時數到期歸零（不遞延）</li>
+            <li class="plan-feat">依方案贈送額外時數</li>
+          </ul>
+          <span class="btn-outline plan-cta" onclick="window.open('https://page.line.me/772wlyoq?oat_content=url&openQrModal=true','_blank')">洽詢方案</span>
+        </div>
+        <p style="text-align:center;font-size:13px;color:var(--dim2);margin-top:28px;line-height:2">
+        ※ 取消政策：48 小時前可更改場面時段乙次；48 小時內不退款，僅退總費用 50%，須至門市辦理。<br>
+        ※ 企業團體 5 人以上請洽詢客製化專案方案。
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="membership-faq">
+    <div class="container">
+      <span class="section-label reveal">FAQ</span>
+      <h2 class="section-title reveal">常見問題 <em>Q&amp;A</em></h2>
+      <div class="gold-bar reveal"></div>
+
+      <div class="faq-grid">
+        <div class="faq-item reveal">
+          <div class="faq-q">入會後多久可以開始使用？</div>
+          <div class="faq-a">完成申辦並付款後，系統將於 24 小時內啟用您的會員資格，並寄送 LINE OA 會員綁定連結，即可立即預訂場地。</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q">可以帶訪客一起打球嗎？</div>
+          <div class="faq-a">Premium 和 Annual 方案皆享有夥伴邀請次數，訪客可以使用會員的邀請額度免費入場；超過額度則以 Drop-in 方式計費。</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q">場地器材需要自帶嗎？</div>
+          <div class="faq-a">場地提供基本球拍及匹克球借用（限量，先到先得）。若需穩定使用，建議自備球拍；Annual 方案入會即贈送專屬球拍一支。</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q">可以中途退費或暫停會籍嗎？</div>
+          <div class="faq-a">月票方案在當月結束後可選擇不續約，無最低合約期限。年費方案提供一次「暫停月」（最長 30 天），暫停期間不計費。詳細條款請參閱入會合約。</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q">訂場是否需要提前多久預約？</div>
+          <div class="faq-a">Standard 會員可提前 3 天預訂；Premium 可提前 7 天；Annual 可提前 14 天。非會員（Drop-in）可提前 1 天預訂剩餘空位。</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q">有提供教練課程嗎？</div>
+          <div class="faq-a">有。我們與認證 USAPA / UPA-A 教練合作，提供入門體驗課、技術提升課、以及進階競技訓練。Annual 會員每年享有 2 堂免費教練課。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: MENU
+══════════════════════════════════════════════ -->
+<div class="page" data-page="menu">
+
+  <div class="page-hero" style="position:relative">
+    <img class="page-hero-img" src="./教室空間.jpg" alt="" loading="lazy">
+    <span class="section-label" style="position:relative;z-index:2">Dining & Bar</span>
+    <h1 class="section-title">餐飲菜單 <em>Menu</em></h1>
+    <p class="page-hero-sub">賽後的最佳延長賽。由主廚精心設計的俱樂部菜單，<br>從賽後輕食、主餐套餐到特調飲品，每道料理都值得認真對待。</p>
+  </div>
+
+  <section class="menu-section">
+    <div class="container">
+
+      <div class="menu-cats">
+        <div class="menu-cat active" onclick="switchMenu(this,'noodles')">🍜 麵食</div>
+        <div class="menu-cat" onclick="switchMenu(this,'pizza')">🍕 披薩</div>
+        <div class="menu-cat" onclick="switchMenu(this,'snacks')">🥚 小點</div>
+        <div class="menu-cat" onclick="switchMenu(this,'colddrink')">🧋 冷飲品</div>
+        <div class="menu-cat" onclick="switchMenu(this,'coffee')">☕ 咖啡</div>
+      </div>
+
+      <!-- NOODLES -->
+      <div class="menu-group active" id="m-noodles">
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">紅燒半筋半肉牛肉麵</div>
+            <div class="menu-item-en">Braised Beef Tendon &amp; Meat Noodle</div>
+            <div class="menu-item-desc">精熬紅燒湯底，半筋半肉口感層次豐富，份量十足</div>
+            <span class="menu-item-tag tag-hot">人氣推薦</span>
+          </div>
+          <div><div class="menu-price">300<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">番茄半筋半肉牛肉麵</div>
+            <div class="menu-item-en">Tomato Beef Tendon &amp; Meat Noodle</div>
+            <div class="menu-item-desc">酸甜番茄湯底清爽開胃，半筋半肉嫩而不柴</div>
+          </div>
+          <div><div class="menu-price">300<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">胡椒豬肚雞麵</div>
+            <div class="menu-item-en">Pepper Pork Tripe &amp; Chicken Noodle</div>
+            <div class="menu-item-desc">濃郁胡椒雞湯暖胃，豬肚脆彈，運動後最佳補給</div>
+            <span class="menu-item-tag tag-hot">賽後首選</span>
+          </div>
+          <div><div class="menu-price">300<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">紅燒排骨麵</div>
+            <div class="menu-item-en">Braised Pork Spare Rib Noodle</div>
+            <div class="menu-item-desc">大塊紅燒排骨，肉質軟嫩入味，湯頭濃厚回甘</div>
+          </div>
+          <div><div class="menu-price">300<span> NT</span></div></div>
+        </div>
+      </div>
+
+      <!-- PIZZA -->
+      <div class="menu-group" id="m-pizza">
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">白醬松露野菇披薩</div>
+            <div class="menu-item-en">Truffle Mushroom White Sauce Pizza</div>
+            <div class="menu-item-desc">香濃白醬底，松露油點綴，綜合野菇鋪滿，8 吋現烤</div>
+            <span class="menu-item-tag tag-hot">人氣推薦</span>
+          </div>
+          <div><div class="menu-price">250<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">辣味墨西哥雞披薩</div>
+            <div class="menu-item-en">Spicy Mexican Chicken Pizza</div>
+            <div class="menu-item-desc">墨西哥辣醬底，嫩煎雞肉、甜椒、洋蔥，香辣過癮，8 吋現烤</div>
+          </div>
+          <div><div class="menu-price">250<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">夏威夷披薩</div>
+            <div class="menu-item-en">Hawaiian Pizza</div>
+            <div class="menu-item-desc">番茄醬底，火腿片、鳳梨、起司，甜鹹交織的經典滋味，8 吋現烤</div>
+          </div>
+          <div><div class="menu-price">250<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">香蒜奶油白醬雞披薩</div>
+            <div class="menu-item-en">Garlic Butter Chicken Pizza</div>
+            <div class="menu-item-desc">香蒜奶油白醬底，嫩雞肉片、蒜末、起司，8 吋現烤</div>
+          </div>
+          <div><div class="menu-price">250<span> NT</span></div></div>
+        </div>
+      </div>
+
+      <!-- SNACKS -->
+      <div class="menu-group" id="m-snacks">
+        <div class="menu-item" style="grid-column:1/-1">
+          <div>
+            <div class="menu-item-name">秘製茶葉蛋</div>
+            <div class="menu-item-en">House Braised Tea Egg</div>
+            <div class="menu-item-desc">獨家秘方滷製，入味香Q，每日現滷限量供應</div>
+            <span class="menu-item-tag tag-hot">每日限量</span>
+          </div>
+          <div><div class="menu-price">15<span> NT</span></div></div>
+        </div>
+      </div>
+
+      <!-- COLD DRINKS -->
+      <div class="menu-group" id="m-colddrink">
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">FIN 補給飲料</div>
+            <div class="menu-item-en">FIN Energy Drink  &nbsp;<small style="color:var(--dim2)">300ml</small></div>
+            <div class="menu-item-desc">運動補給首選，快速補充電解質</div>
+            <span class="menu-item-tag tag-hot">運動推薦</span>
+          </div>
+          <div><div class="menu-price">20<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">奇兒思氣泡水</div>
+            <div class="menu-item-en">Ceres Sparkling Water  &nbsp;<small style="color:var(--dim2)">500ml</small></div>
+            <div class="menu-item-desc">清爽氣泡礦泉水，無糖無熱量</div>
+          </div>
+          <div><div class="menu-price">30<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">可口可樂</div>
+            <div class="menu-item-en">Coca-Cola  &nbsp;<small style="color:var(--dim2)">330ml</small></div>
+            <div class="menu-item-desc">經典可樂，暢快解渴</div>
+          </div>
+          <div><div class="menu-price">50<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">可口可樂 ZERO</div>
+            <div class="menu-item-en">Coca-Cola ZERO  &nbsp;<small style="color:var(--dim2)">330ml</small></div>
+            <div class="menu-item-desc">零糖零熱量，享受可樂風味</div>
+          </div>
+          <div><div class="menu-price">50<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">雪碧</div>
+            <div class="menu-item-en">Sprite  &nbsp;<small style="color:var(--dim2)">330ml</small></div>
+            <div class="menu-item-desc">清新檸檬柳橙風味氣泡飲</div>
+          </div>
+          <div><div class="menu-price">50<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">舒味思通寧水</div>
+            <div class="menu-item-en">Schweppes Tonic Water  &nbsp;<small style="color:var(--dim2)">330ml</small></div>
+            <div class="menu-item-desc">微苦清爽的通寧風味氣泡飲</div>
+          </div>
+          <div><div class="menu-price">60<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">舒味思薑味水</div>
+            <div class="menu-item-en">Schweppes Ginger Ale  &nbsp;<small style="color:var(--dim2)">330ml</small></div>
+            <div class="menu-item-desc">天然薑汁風味，運動後暖胃解膩</div>
+          </div>
+          <div><div class="menu-price">60<span> NT</span></div></div>
+        </div>
+      </div>
+
+      <!-- COFFEE -->
+      <div class="menu-group" id="m-coffee">
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">美式咖啡</div>
+            <div class="menu-item-en">Americano  &nbsp;<small style="color:var(--dim2)">冷/熱 12oz</small></div>
+            <div class="menu-item-desc">清爽咖啡香，適合運動前後提振精神</div>
+          </div>
+          <div><div class="menu-price">80<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">拿鐵咖啡</div>
+            <div class="menu-item-en">Caffè Latte  &nbsp;<small style="color:var(--dim2)">冷/熱 14oz</small></div>
+            <div class="menu-item-desc">濃縮咖啡與細滑奶泡的完美融合</div>
+            <span class="menu-item-tag tag-hot">人氣推薦</span>
+          </div>
+          <div><div class="menu-price">100<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">摩卡咖啡</div>
+            <div class="menu-item-en">Caffè Mocha  &nbsp;<small style="color:var(--dim2)">冷/熱 14oz</small></div>
+            <div class="menu-item-desc">巧克力與咖啡香氣層層堆疊</div>
+          </div>
+          <div><div class="menu-price">100<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">卡布奇諾</div>
+            <div class="menu-item-en">Cappuccino  &nbsp;<small style="color:var(--dim2)">冷/熱 14oz</small></div>
+            <div class="menu-item-desc">三等份完美比例，奶泡豐富綿密</div>
+          </div>
+          <div><div class="menu-price">100<span> NT</span></div></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">巧克力可可</div>
+            <div class="menu-item-en">Hot / Iced Chocolate  &nbsp;<small style="color:var(--dim2)">冷/熱 14oz</small></div>
+            <div class="menu-item-desc">濃郁巧克力牛奶，適合各年齡層</div>
+          </div>
+          <div><div class="menu-price">100<span> NT</span></div></div>
+        </div>
+      </div>
+
+      <div class="menu-notice">
+        ※ 菜單品項及價格以現場公告為準，可能依季節與食材供應調整。<br>
+        ※ 如有食物過敏或飲食限制，請在點餐時告知服務人員，我們將盡力協助。<br>
+        ※ 外帶服務請提前告知，現點現做，謝謝。
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: EVENTS
+══════════════════════════════════════════════ -->
+<div class="page" data-page="events">
+
+  <div class="page-hero" style="position:relative">
+    <img class="page-hero-img" src="./教室空間.jpg" alt="" loading="lazy">
+    <span class="section-label" style="position:relative;z-index:2">Events & Tournaments</span>
+    <h1 class="section-title">賽事活動 <em>Events</em></h1>
+    <p class="page-hero-sub">從社區聯誼賽到正式競技錦標賽，從企業包場到品牌活動，<br>匹克王是中台灣最完整的匹克球賽事策源地。</p>
+  </div>
+
+  <!-- UPCOMING -->
+  <section class="events-upcoming">
+    <div class="container">
+      <span class="section-label reveal">Upcoming Events</span>
+      <h2 class="section-title reveal">近期活動 <em>一覽</em></h2>
+      <div class="gold-bar reveal"></div>
+
+      <div class="event-grid">
+        <div class="event-card featured reveal">
+          <div class="event-img tall" style="overflow:hidden"><img class="real-img" src="./教室空間.jpg" alt="第一屆匹克王社區聯誼賽" loading="lazy"></div>
+          <div class="event-body">
+            <div class="event-date">2026 / 06 / 20 — SATURDAY</div>
+            <h3 class="event-title">第一屆「匹克王」2.0 匹克球社區聯誼賽</h3>
+            <p class="event-sub">IFP 官方規則，三點制（20→40→60），入門 2.0 組別，上限 32 隊。中華民國匹克球總會、台中市龍井區委員會聯合協辦。</p>
+            <div class="event-tags">
+              <span class="event-status status-open">報名開放中</span>
+              <span class="event-tag">2.0 入門組</span>
+              <span class="event-tag">IFP 規則</span>
+              <span class="event-tag">單日賽事</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <div class="event-card reveal">
+            <div class="event-body">
+              <div class="event-date">2026 / 06 / 27 — 每週六</div>
+              <h3 class="event-title">匹克王社區匹克球推廣課程（12 週）</h3>
+              <p class="event-sub">運動部全民運動署補助計畫，每週六下午開課，由 USAPA 認證教練主持，共 12 週 24 小時，招收 20 名學員。</p>
+              <div class="event-tags">
+                <span class="event-status status-soon">即將開放</span>
+                <span class="event-tag">政府補助</span>
+                <span class="event-tag">入門適合</span>
+              </div>
+            </div>
+          </div>
+          <div class="event-card reveal">
+            <div class="event-body">
+              <div class="event-date">2026 Q3 — 敬請期待</div>
+              <h3 class="event-title">PICKLE KING 秋季邀請賽</h3>
+              <p class="event-sub">本年度最高規格賽事，預計邀請中台灣各社群俱樂部組隊參賽，賽制與獎項詳情即將公布。</p>
+              <div class="event-tags">
+                <span class="event-status status-soon">規劃中</span>
+                <span class="event-tag">競技組</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORPORATE -->
+  <section class="events-corporate">
+    <div class="container">
+      <span class="section-label reveal">Corporate & Groups</span>
+      <h2 class="section-title reveal">企業 / 團體方案 <em>客製服務</em></h2>
+      <div class="gold-bar reveal"></div>
+      <div class="corp-grid">
+        <div class="corp-card reveal">
+          <div class="corp-icon">🏢</div>
+          <div class="corp-title">企業員工活動</div>
+          <p class="corp-text">為您的團隊設計專屬的半日 / 全日運動社交體驗。包場球場 + 餐廳，我們負責從場地配置到餐飲安排的一切細節。</p>
+        </div>
+        <div class="corp-card reveal">
+          <div class="corp-icon">🎬</div>
+          <div class="corp-title">節目 / 媒體拍攝</div>
+          <p class="corp-text">高挑寬敞的場館空間，充足採光與專業燈光設備，適合廣告拍攝、節目製作、社群影音內容創作，提供完整媒體接待流程。</p>
+        </div>
+        <div class="corp-card reveal">
+          <div class="corp-icon">🏆</div>
+          <div class="corp-title">品牌贊助 / 冠名賽事</div>
+          <p class="corp-text">我們定期舉辦具一定規模的競技賽事，開放企業品牌冠名合作，觸及中台灣活躍運動消費族群，歡迎洽談合作方案。</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:48px">
+        <span class="btn-gold" onclick="navigate('contact')">洽談客製方案</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: CONTACT
+══════════════════════════════════════════════ -->
+<div class="page" data-page="contact">
+
+  <div class="page-hero" style="position:relative">
+    <img class="page-hero-img" src="./6面球場.jpg" alt="" loading="lazy">
+    <span class="section-label" style="position:relative;z-index:2">Location & Contact</span>
+    <h1 class="section-title">聯絡我們 <em>Contact</em></h1>
+    <p class="page-hero-sub">台中南屯，中台灣交通樞紐。免費停車 2,500 格，開車族零煩惱。<br>歡迎親自造訪，或透過以下方式與我們聯繫。</p>
+  </div>
+
+  <section class="contact-main">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="contact-info">
+          <div class="info-block reveal">
+            <div class="info-label">Address</div>
+            <div class="info-val">台中市南屯區環中路四段 2 號</div>
+            <div class="info-sub">No.2, Sec.4, Huanzhong Rd., Nantun Dist., Taichung City</div>
+          </div>
+          <div class="info-block reveal">
+            <div class="info-label">Contact</div>
+            <div class="info-val">聯絡我們</div>
+            <div class="info-sub">
+              電話：0911-716-532<br>
+              Email：ops.pickleking@gmail.com<br>
+              官網：pickleball-king.com.tw
+            </div>
+          </div>
+          <div class="info-block reveal">
+            <div class="info-label">Social Media</div>
+            <div class="info-val">加入我們的社群</div>
+            <div class="info-sub">
+              LINE 官方帳號：@pickleking<br>
+              Instagram：@picklekingtw<br>
+              Facebook：PICKLE KING 匹克王
+            </div>
+          </div>
+          <div class="info-block reveal">
+            <div class="info-label">Registration</div>
+            <div class="info-val">匹克王運動行銷餐飲有限公司</div>
+            <div class="info-sub">統一編號：60532462<br>商標已申請登記 ®</div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="map-ph">
+            <div class="map-icon">📍</div>
+            <div class="map-addr">
+              台中市南屯區環中路四段 2 號<br>
+              <span style="font-size:12px;color:var(--dim2);letter-spacing:0.3em">Google Maps 即將嵌入</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOURS -->
+      <h3 class="section-title reveal" style="margin-top:72px;font-size:clamp(22px,3vw,32px)">營業時間 <em>Hours</em></h3>
+      <div class="gold-bar reveal"></div>
+      <div class="hours-grid">
+        <div class="hour-item"><span class="hour-day">星期一</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期二</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期三</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期四</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期五</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期六</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">星期日</span><span class="hour-time">09:00 – 22:00</span></div>
+        <div class="hour-item"><span class="hour-day">國定假日</span><span class="hour-time">依公告調整</span></div>
+      </div>
+
+      <!-- SOCIAL CARDS -->
+      <div class="social-row" style="margin-top:48px">
+        <div class="social-card">
+          <div class="social-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="36" height="36" rx="8" fill="#06C755"/>
+  <path d="M18 7C11.925 7 7 11.09 7 16.1c0 4.495 3.99 8.26 9.38 8.975.365.079.862.24.988.55.113.282.074.724.036 1.009l-.16 1.009c-.049.282-.225 1.104.968.602 1.193-.502 6.438-3.79 8.782-6.493C28.56 19.89 29 18.06 29 16.1 29 11.09 24.075 7 18 7z" fill="white"/>
+  <path d="M15.2 13.8h-.9a.25.25 0 00-.25.25v5.7c0 .138.112.25.25.25h.9a.25.25 0 00.25-.25v-5.7a.25.25 0 00-.25-.25zM21.45 13.8h-.9a.25.25 0 00-.25.25v3.388l-2.613-3.527A.251.251 0 0017.48 13.8h-.93a.25.25 0 00-.25.25v5.7c0 .138.112.25.25.25h.9a.25.25 0 00.25-.25v-3.387l2.617 3.53a.25.25 0 00.203.107h.93a.25.25 0 00.25-.25v-5.7a.25.25 0 00-.25-.25zM13.5 18.6H11.2v-4.55a.25.25 0 00-.25-.25h-.9a.25.25 0 00-.25.25v5.7c0 .066.027.127.07.172a.248.248 0 00.18.078H13.5a.25.25 0 00.25-.25v-.9a.25.25 0 00-.25-.25zM25.2 15.05a.25.25 0 00.25-.25v-.9a.25.25 0 00-.25-.25h-3.45a.248.248 0 00-.18.078.243.243 0 00-.07.172v5.7c0 .066.027.127.07.172a.248.248 0 00.18.078H25.2a.25.25 0 00.25-.25v-.9a.25.25 0 00-.25-.25H22.9v-.975H25.2a.25.25 0 00.25-.25v-.9a.25.25 0 00-.25-.25H22.9v-.975H25.2z" fill="#06C755"/>
+</svg></div>
+          <div>LINE 官方帳號</div>
+          <div style="font-size:11px;color:var(--dim2)">訂場 / 客服 / 活動通知</div>
+        </div>
+        <div class="social-card">
+          <div class="social-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="ig_g1" cx="30%" cy="107%" r="150%">
+      <stop offset="0%" stop-color="#fdf497"/>
+      <stop offset="5%" stop-color="#fdf497"/>
+      <stop offset="45%" stop-color="#fd5949"/>
+      <stop offset="60%" stop-color="#d6249f"/>
+      <stop offset="90%" stop-color="#285AEB"/>
+    </radialGradient>
+  </defs>
+  <rect width="36" height="36" rx="8" fill="url(#ig_g1)"/>
+  <circle cx="18" cy="18" r="5.5" stroke="white" stroke-width="2.2" fill="none"/>
+  <circle cx="24.5" cy="11.5" r="1.5" fill="white"/>
+  <rect x="6" y="6" width="24" height="24" rx="6" stroke="white" stroke-width="2.2" fill="none"/>
+</svg></div>
+          <div>Instagram</div>
+          <div style="font-size:11px;color:var(--dim2)">@picklekingtw</div>
+        </div>
+        <div class="social-card">
+          <div class="social-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="36" height="36" rx="8" fill="#1877F2"/>
+  <path d="M19.5 19.5h3l.5-3H19.5v-1.75c0-.87.42-1.75 1.75-1.75H23V10h-2.25C17.85 10 16 11.85 16 14.75V16.5h-2.5v3H16V27h3.5V19.5z" fill="white"/>
+</svg></div>
+          <div>Facebook</div>
+          <div style="font-size:11px;color:var(--dim2)">PICKLE KING 匹克王</div>
+        </div>
+        <div class="social-card">
+          <div class="social-icon"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="36" height="36" rx="8" fill="#FF0000"/>
+  <path d="M28.5 13.5a2.83 2.83 0 00-2-2C25 11 18 11 18 11s-7 0-8.5.5a2.83 2.83 0 00-2 2C7 15 7 18 7 18s0 3 .5 4.5a2.83 2.83 0 002 2C11 25 18 25 18 25s7 0 8.5-.5a2.83 2.83 0 002-2C29 21 29 18 29 18s0-3-.5-4.5z" fill="#FF0000"/>
+  <path d="M15.5 21.5l7-3.5-7-3.5v7z" fill="white"/>
+</svg></div>
+          <div>YouTube</div>
+          <div style="font-size:11px;color:var(--dim2)">賽事精華 / 教學影片</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- ──────────────────────────────────────
+   FOOTER
+────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-en">PICKLE KING</div>
+      <div class="footer-brand-zh">匹克王運動餐廳</div>
+      <p class="footer-tagline">中台灣第一座匹克球複合式俱樂部。<br>運動 × 餐飲 × 社群，三軸並行。</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li onclick="navigate('home')">首頁</li>
+        <li onclick="navigate('courts')">場地訂場</li>
+        <li onclick="navigate('membership')">會員方案</li>
+        <li onclick="navigate('menu')">餐飲菜單</li>
+        <li onclick="navigate('events')">賽事活動</li>
+        <li onclick="navigate('contact')">聯絡我們</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Service</h4>
+      <ul>
+        <li>球場租借</li>
+        <li>教練課程</li>
+        <li>企業包場</li>
+        <li>賽事主辦</li>
+        <li>媒體接待</li>
+        <li>品牌合作</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li>台中市南屯區環中路四段 2 號</li>
+        <li>0911-716-532</li>
+        <li><a href="mailto:ops.pickleking@gmail.com">ops.pickleking@gmail.com</a></li>
+        <li><a href="https://pickleball-king.com.tw">pickleball-king.com.tw</a></li>
+        <li>LINE：@pickleking</li>
+        <li>IG：@picklekingtwv</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 匹克王運動行銷餐飲有限公司 | 統編 60532462</span>
+    <span class="footer-trademark">PICKLE KING ® 商標申請中 — 台中在地獨立品牌</span>
+  </div>
+</footer>
+
+<!-- ──────────────────────────────────────
+   JAVASCRIPT
+────────────────────────────────────── -->
+<script>
+// ── Routing ──
+function navigate(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target=document.querySelector(`[data-page="${page}"]`);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('[data-nav]').forEach(l=>l.classList.remove('active'));
+  const navLink=document.querySelector(`[data-nav="${page}"]`);
+  if(navLink) navLink.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  history.pushState(null,'',`#${page}`);
+  // Immediately show all elements in the new page (staggered)
+  showPageContent(target);
+}
+
+function showPageContent(pageEl){
+  // Content is visible by default; JS animation is enhancement only
+  if(!pageEl) return;
+  pageEl.style.opacity='0';
+  pageEl.style.transition='opacity 0.35s ease';
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{ pageEl.style.opacity='1'; });
+  });
+}
+
+window.addEventListener('popstate',()=>{
+  const page=location.hash.replace('#','')||'home';
+  navigate(page);
+});
+
+// Init from hash
+(function(){
+  const page=location.hash.replace('#','')||'home';
+  navigate(page);
+})();
+
+// Reveal fallback removed — content visible by default
+
+// ── Nav scroll ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40);
+},{ passive:true });
+
+// ── Hamburger ──
+function toggleDrawer(){
+  const d=document.getElementById('drawer');
+  const h=document.getElementById('hamburger');
+  d.classList.toggle('open');
+  h.classList.toggle('open');
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+
+// Scroll reveal — simplified no-op (content visible by default)
+function revealOnScroll(){}
+
+// ── Price tabs ──
+function switchPriceTab(el,id){
+  document.querySelectorAll('.price-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.price-rows').forEach(r=>r.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('pr-'+id).classList.add('active');
+}
+
+// ── Menu tabs ──
+function switchMenu(el,id){
+  document.querySelectorAll('.menu-cat').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.menu-group').forEach(g=>g.classList.remove('active'));
+  el.classList.add('active');
+  const grp = document.getElementById('m-'+id);
+  if(grp){
+    grp.classList.add('active');
+    grp.querySelectorAll('.reveal').forEach((el,i)=>{
+      setTimeout(()=>el.classList.add('visible'), 30 + i*30);
+    });
+  }
+}
+</script>
+</body>
+</html>
